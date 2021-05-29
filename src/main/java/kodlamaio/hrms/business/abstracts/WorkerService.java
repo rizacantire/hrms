@@ -7,7 +7,7 @@ import java.util.List;
 public interface WorkerService {
     List<Worker> getAll();
 
-    void add(Worker worker);
+    void register(Worker worker);
     void delete(Worker worker);
     void update(Worker worker);
 }

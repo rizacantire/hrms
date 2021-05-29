@@ -4,11 +4,11 @@ import kodlamaio.hrms.entites.concretes.Employer;
 
 import java.util.List;
 
-public interface EmpolyerService {
+public interface EmployerService {
 
     List<Employer> getAll();
 
-    void add(Employer employer);
+    void register(Employer employer);
     void delete(Employer employer);
     void update(Employer employer);
 }

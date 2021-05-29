@@ -7,7 +7,7 @@ import java.util.List;
 public interface PersonService {
     List<Person> getAll();
 
-    void add(Person person);
+    void register(Person person);
     void delete(Person person);
     void update(Person person);
 }

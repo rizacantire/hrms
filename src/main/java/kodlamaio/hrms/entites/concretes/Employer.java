@@ -1,7 +1,14 @@
 package kodlamaio.hrms.entites.concretes;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "employer")
 public class Employer {
@@ -19,45 +26,5 @@ public class Employer {
     @Column(name = "phone")
     private String phone;
 
-    public Employer() {
-    }
 
-    public Employer(int id, String companyName, String webSite, String phone) {
-        this.id = id;
-        this.companyName = companyName;
-        this.webSite = webSite;
-        this.phone = phone;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getWebSite() {
-        return webSite;
-    }
-
-    public void setWebSite(String webSite) {
-        this.webSite = webSite;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }

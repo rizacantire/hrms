@@ -1,7 +1,14 @@
 package kodlamaio.hrms.entites.concretes;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "mail_verify")
 public class MailVerify {
@@ -13,24 +20,5 @@ public class MailVerify {
     @Column(name = "verify_code")
     private String verifyCode;
 
-    public MailVerify(int id, String verifyCode) {
-        this.id = id;
-        this.verifyCode = verifyCode;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getVerifyCode() {
-        return verifyCode;
-    }
-
-    public void setVerifyCode(String verifyCode) {
-        this.verifyCode = verifyCode;
-    }
 }
