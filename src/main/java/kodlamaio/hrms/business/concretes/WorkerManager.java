@@ -1,9 +1,11 @@
 package kodlamaio.hrms.business.concretes;
 
-import kodlamaio.hrms.business.abstracts.WorkService;
 import kodlamaio.hrms.business.abstracts.WorkerService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.WorkerDao;
-import kodlamaio.hrms.entites.concretes.Work;
 import kodlamaio.hrms.entites.concretes.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,22 +22,27 @@ public class WorkerManager implements WorkerService {
 
 
     @Override
-    public List<Worker> getAll() {
-        return this.workerDao.findAll();
+    public DataResult<List<Worker>> getAll() {
+
+        return new SuccessDataResult<List<Worker>>(this.workerDao.findAll());
     }
 
     @Override
-    public void register(Worker worker) {
+    public Result register(Worker worker) {
+
         this.workerDao.save(worker);
+        return new SuccessResult("Çalışan kaydı gerçekleşti");
     }
 
     @Override
-    public void delete(Worker worker) {
+    public Result delete(Worker worker) {
         this.workerDao.delete(worker);
+        return new SuccessResult("Çalışan kaydı güncellendi");
     }
 
     @Override
-    public void update(Worker worker) {
+    public Result update(Worker worker) {
         this.workerDao.save(worker);
+        return new SuccessResult("Çalışan kaydı silindi");
     }
 }

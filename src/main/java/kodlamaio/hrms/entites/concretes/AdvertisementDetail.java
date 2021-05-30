@@ -5,24 +5,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "work")
-public class Work {
+@Table(name = "advertisement_detail")
+public class AdvertisementDetail {
+
     @Id
     @GeneratedValue
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "advertisement_id")
+    private int advertisementId;
 
-    @OneToMany(mappedBy = "work")
-    private List<Advertisement> advertisements;
+    @Column(name = "work_id")
+    private int workId;
+
+    @Column(name = "city_id")
+    private int cityId;
 
 
 }

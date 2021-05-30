@@ -1,6 +1,8 @@
 package kodlamaio.hrms.api;
 
 import kodlamaio.hrms.business.abstracts.WorkService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entites.concretes.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,20 +23,21 @@ public class WorksController {
     }
 
     @GetMapping("getall")
-    public List<Work> getAll(){
+    public DataResult<List<Work>> getAll(){
 
         return this.workService.getAll();
     }
 
     @PostMapping("add")
     @Transactional
-    public void add(@RequestBody Work work){
+    public Result add(@RequestBody Work work){
 
-        this.workService.add(work);
+        return this.workService.add(work);
+
     }
 
     @GetMapping(value="get/{id}")
-    public Optional<Work> getById(@PathVariable int id){
+    public DataResult<Optional<Work>> getById(@PathVariable int id){
         return this.workService.getById(id);
     }
 

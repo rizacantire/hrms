@@ -1,13 +1,14 @@
 package kodlamaio.hrms.business.abstracts;
 
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.entites.concretes.Person;
 
 import java.util.List;
 
 public interface PersonService {
-    List<Person> getAll();
+    DataResult<List<Person>> getAll();
 
-    void register(Person person);
-    void delete(Person person);
-    void update(Person person);
+    Result register(Person person);
+    Result delete(Person person);
+    Result update(Person person);
 }

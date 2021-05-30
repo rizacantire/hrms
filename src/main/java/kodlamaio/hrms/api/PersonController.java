@@ -1,6 +1,8 @@
 package kodlamaio.hrms.api;
 
 import kodlamaio.hrms.business.abstracts.PersonService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entites.concretes.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +21,15 @@ public class PersonController {
     }
 
     @GetMapping("getall")
-    public List<Person> getAll(){
+    public DataResult<List<Person>> getAll(){
 
        return this.personService.getAll();
     }
 
     @PostMapping("register")
-    public void register(@RequestBody Person person){
-        this.personService.register(person);
+    public Result register(@RequestBody Person person){
+
+        return this.personService.register(person);
     }
 
 }

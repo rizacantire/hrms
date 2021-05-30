@@ -1,14 +1,15 @@
 package kodlamaio.hrms.business.abstracts;
 
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.entites.concretes.JobSeeker;
 
 import java.util.List;
 
 public interface JobSeekerService {
-    List<JobSeeker> getAll();
+    DataResult<List<JobSeeker>> getAll();
 
-    void register(JobSeeker jobSeeker);
-    void delete(JobSeeker jobSeeker);
-    void update(JobSeeker jobSeeker);
+    Result register(JobSeeker jobSeeker);
+    Result delete(JobSeeker jobSeeker);
+    Result update(JobSeeker jobSeeker);
 
 }

@@ -1,6 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.PersonService;
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.PersonDao;
 import kodlamaio.hrms.entites.concretes.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,37 +20,37 @@ public class PersonManager implements PersonService {
     }
 
     @Override
-    public List<Person> getAll() {
+    public DataResult<List<Person>> getAll() {
 
-        return this.personDao.findAll();
+        return new SuccessDataResult<List<Person>>(this.personDao.findAll());
     }
 
     @Override
-    public void register(Person person) {
+    public Result register(Person person) {
 
         if (this.personDao.findAllByMail(person.getMail()).stream().count() != 0) {
-                System.out.println("Mail adresi sistemde kayıtlı");;
+                return new ErrorResult("Mail adresi kayıtlı");
             } else {
                 this.personDao.save(person);
+                return new SuccessResult("Kayıt işlemi başarılı");
             }
 
     }
 
     @Override
-    public void delete(Person person) {
+    public Result delete(Person person) {
+
         this.personDao.delete(person);
+        return new SuccessResult("Kişi silindi");
     }
 
     @Override
-    public void update(Person person) {
-        List<Person> users = getAll();
-
-        for (Person user : users) {
-            if (user.getMail() == person.getMail()) {
-                System.out.println("Mail adresi sistemde kayıtlı");;
-            } else {
-                this.personDao.save(person);
-            }
+    public Result update(Person person) {
+        if (this.personDao.findAllByMail(person.getMail()).stream().count() != 0) {
+            return new ErrorResult("Mail adresi kayıtlı");
+        } else {
+            this.personDao.save(person);
+            return new SuccessResult("Kayıt işlemi başarılı");
         }
     }
 

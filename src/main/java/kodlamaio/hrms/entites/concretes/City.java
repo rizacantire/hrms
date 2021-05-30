@@ -11,8 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "work")
-public class Work {
+@Table(name = "city")
+public class City {
+
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -21,8 +22,6 @@ public class Work {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "work")
+    @OneToMany(mappedBy = "city")
     private List<Advertisement> advertisements;
-
-
 }

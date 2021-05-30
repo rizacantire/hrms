@@ -1,11 +1,12 @@
 package kodlamaio.hrms.api;
 
 import kodlamaio.hrms.business.abstracts.WorkerService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.entites.concretes.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,13 +18,21 @@ public class WorkersController {
 
     @Autowired
     public WorkersController(WorkerService workerService) {
+
+        super();
         this.workerService = workerService;
     }
 
     @GetMapping("getall")
-    public List<Worker> getAll(){
+    public DataResult<List<Worker>> getAll(){
 
         return this.workerService.getAll();
+    }
+
+    @PostMapping("register")
+    public Result add(@RequestBody Worker worker){
+        return this.workerService.register(worker);
+
     }
 
 

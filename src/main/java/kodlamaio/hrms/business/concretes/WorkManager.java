@@ -1,8 +1,8 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.WorkService;
+import kodlamaio.hrms.core.utilities.results.*;
 import kodlamaio.hrms.dataAccess.abstracts.WorkDao;
-import kodlamaio.hrms.entites.concretes.Person;
 import kodlamaio.hrms.entites.concretes.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,38 +23,44 @@ public class WorkManager implements WorkService {
 
 
     @Override
-    public List<Work> getAll() {
+    public DataResult<List<Work>>  getAll() {
 
-        return this.workDao.findAll();
+        return new SuccessDataResult<List<Work>>(this.workDao.findAll(),"İş listesi getirildi");
     }
 
 
     @Override
     @Transactional
-    public void add(Work work) {
+    public Result add(Work work) {
 
         if (this.workDao.findAllByName(work.getName()).stream().count() != 0) {
-            System.out.println("İş sistemde kayıtlı");;
+            return new ErrorResult("İş sistemde kayıtlı");
         } else {
             this.workDao.save(work);
+            return new SuccessResult("İş Eklendi");
         }
 
-
     }
 
     @Override
-    public void delete(Work work) {
-
+    public Result delete(Work work) {
+        this.workDao.delete(work);
+        return new SuccessResult("İş silindi");
     }
 
     @Override
-    public void update(Work work) {
-
+    public Result update(Work work) {
+        if (this.workDao.findAllByName(work.getName()).stream().count() != 0) {
+            return new ErrorResult("İş sistemde kayıtlı");
+        } else {
+            this.workDao.save(work);
+            return new SuccessResult("İş Güncellendi");
+        }
     }
 
     @Override
-    public Optional<Work> getById(int id) {
+    public DataResult<Optional<Work>> getById(int id) {
 
-        return this.workDao.findById(id);
+        return new SuccessDataResult<Optional<Work>>(this.workDao.findById(id));
     }
 }

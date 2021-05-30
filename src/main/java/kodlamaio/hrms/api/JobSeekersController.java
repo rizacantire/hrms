@@ -1,31 +1,35 @@
 package kodlamaio.hrms.api;
 
 import kodlamaio.hrms.business.abstracts.JobSeekerService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entites.concretes.JobSeeker;
-import kodlamaio.hrms.entites.concretes.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/jobseekers/")
-public class JobSeekerController {
+public class JobSeekersController {
     private JobSeekerService jobSeekerService;
 
-    public JobSeekerController(JobSeekerService jobSeekerService){
+    @Autowired
+    public JobSeekersController(JobSeekerService jobSeekerService){
 
         this.jobSeekerService = jobSeekerService;
     }
 
     @GetMapping("getall")
-    public List<JobSeeker> getAll(){
+    public DataResult<List<JobSeeker>> getAll(){
 
         return this.jobSeekerService.getAll();
     }
 
     @PostMapping("register")
-    public void register(@RequestBody JobSeeker jobSeeker){
-        this.jobSeekerService.register(jobSeeker);
+    public Result register(@RequestBody JobSeeker jobSeeker){
+
+        return this.jobSeekerService.register(jobSeeker);
     }
 
 }

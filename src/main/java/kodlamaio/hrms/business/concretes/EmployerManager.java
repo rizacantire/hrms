@@ -1,6 +1,10 @@
 package kodlamaio.hrms.business.concretes;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entites.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,23 +22,27 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
-    public List<Employer> getAll() {
-        return this.employerDao.findAll();
+    public DataResult<List<Employer>> getAll() {
+
+        return new SuccessDataResult<List<Employer>>(this.employerDao.findAll());
     }
 
     @Override
-    public void register(Employer employer) {
+    public Result register(Employer employer) {
         this.employerDao.save(employer);
+        return new SuccessResult("Kayıt işlemi başarılı");
 
     }
 
     @Override
-    public void delete(Employer employer) {
+    public Result delete(Employer employer) {
         this.employerDao.delete(employer);
+        return new SuccessResult("Kayıt silindi");
     }
 
     @Override
-    public void update(Employer employer) {
+    public Result update(Employer employer) {
         this.employerDao.save(employer);
+        return new SuccessResult("Kayıt güncellendi");
     }
 }

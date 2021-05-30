@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import javax.persistence.*;
 public class Employer {
     @Id
     @GeneratedValue
-    @Column(name = "person_id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "company_name")
@@ -25,6 +26,9 @@ public class Employer {
 
     @Column(name = "phone")
     private String phone;
+
+    @OneToMany(mappedBy = "employer")
+    private List<Advertisement> advertisements;
 
 
 }
